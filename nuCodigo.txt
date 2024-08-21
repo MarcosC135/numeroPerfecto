@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class NumeroPerfecto {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese el límite superior para buscar números perfectos: ");
+        int limiteSuperior = scanner.nextInt();
+        scanner.close();
+
+        System.out.println("Números perfectos entre 1 y " + limiteSuperior + ":");
+        for (int i = 2; i <= limiteSuperior; i++) {
+            if (esNumeroPerfecto(i)) {
+                System.out.println(i);
+            }
+        }
+    }
+
+    /**
+     * Determina si un número es perfecto.
+     *
+     * @param numero El número a verificar.
+     * @return true si el número es perfecto, false en caso contrario.
+     */
+    public static boolean esNumeroPerfecto(int numero) {
+        if (numero <= 1) {
+            return false;
+        }
+
+        int sumaDivisores = 1; // 1 siempre es un divisor propio
+
+        
+        for (int i = 2; i * i <= numero; i++) {
+            if (numero % i == 0) {
+                sumaDivisores += i;
+                if (i != numero / i) { // Evitar sumar el cuadrado de un número
+                    sumaDivisores += numero / i;
+                }
+            }
+        }
+
+        
+        return sumaDivisores == numero;
+    }
+}
